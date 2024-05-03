@@ -1,11 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  IconButton,
-  Input,
-  InputAdornment,
-  InputLabel,
-  TextField,
-} from "@mui/material";
+import { Input, InputAdornment } from "@mui/material";
 
 import SearchIcon from "@mui/icons-material/Search";
 import { GET_CHARACTERS_BY_NAME } from "../../queries/characters.query";
