@@ -1,5 +1,8 @@
 import { createContext } from "react";
 
-import { SearchResult } from "../types/search.types";
+import { Character } from "../types/character.types";
 
-export const SearchContext = createContext(<SearchResult[] | null>[]);
+export const SearchContext = createContext({
+  searchResults: <Character[] | null>[],
+  setSearchResults: (_results: Character[] | null) => {},
+});
