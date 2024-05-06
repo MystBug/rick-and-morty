@@ -1,22 +1,18 @@
-import { useContext, useEffect, useState } from "react";
+import { useState } from "react";
 import { Input, InputAdornment } from "@mui/material";
 
 import SearchIcon from "@mui/icons-material/Search";
 import { GET_CHARACTERS_BY_NAME } from "../../queries/characters.query";
 import { useLazyQuery } from "@apollo/client";
-import { SearchContext } from "../../context/search.context";
+import { useNavigate } from "react-router";
 
 export const Search = () => {
   const [search, setSearch] = useState("");
-  const { setSearchResults } = useContext(SearchContext);
+  const navigate = useNavigate();
 
   const [getCharactersByName, { loading, error, data }] = useLazyQuery(
     GET_CHARACTERS_BY_NAME
   );
-
-  useEffect(() => {
-    setSearchResults(data?.characters.results || []);
-  }, [data, setSearchResults]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(e.target.value);
@@ -25,6 +21,7 @@ export const Search = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     getCharactersByName({ variables: { name: search } });
+    navigate("/search/" + search);
   };
 
   return (

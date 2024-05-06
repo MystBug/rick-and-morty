@@ -1,17 +1,28 @@
-import { useContext } from "react";
 import { Grid, Box } from "@mui/material";
 
-import { SearchContext } from "../../context/search.context";
 import { CharacterCard } from "../card/CharacterCard";
+import { useParams } from "react-router-dom";
+import { useQuery } from "@apollo/client";
+import { GET_CHARACTERS_BY_NAME } from "../../queries/characters.query";
+import { Character } from "../../types/character.types";
 
 export const Results = () => {
-  const { searchResults } = useContext(SearchContext);
+  const { searchTerm } = useParams();
+
+  const { loading, error, data } = useQuery(GET_CHARACTERS_BY_NAME, {
+    variables: { name: searchTerm },
+  });
+
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error.message}</p>;
 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2} padding={2} justifyContent={"center"}>
-        {searchResults &&
-          searchResults.map((row) => <CharacterCard key={row.id} {...row} />)}
+        {data.characters.results &&
+          data.characters.results.map((row: Character) => (
+            <CharacterCard key={row.id} {...row} />
+          ))}
       </Grid>
     </Box>
   );

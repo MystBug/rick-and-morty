@@ -1,5 +1,4 @@
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
 
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 
@@ -22,11 +21,10 @@ const darkTheme = createTheme({
 const root = ReactDOM.createRoot(document.getElementById("root")!);
 
 root.render(
-  <ApolloProvider client={client}>
-    <ThemeProvider theme={darkTheme}>
+  <ThemeProvider theme={darkTheme}>
+    <ApolloProvider client={client}>
       <CssBaseline />
-      <App />
-    </ThemeProvider>
-    <RouterProvider router={router} />
-  </ApolloProvider>
+      <RouterProvider router={router} />
+    </ApolloProvider>
+  </ThemeProvider>
 );
