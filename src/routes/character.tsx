@@ -6,7 +6,7 @@ import { Character as CharacterType } from "../types/character.types";
 import Link from "@mui/material/Link";
 
 import { CharacterCard } from "../components/card/CharacterCard";
-import { Grid } from "@mui/material";
+import { Grid, Table, TableCell, TableRow } from "@mui/material";
 
 export default function Character() {
   const { characterId } = useParams();
@@ -18,14 +18,38 @@ export default function Character() {
   if (error) return <p>Error: {error.message}</p>;
 
   return (
-    <>
-      <img src={data.character.image} alt={data.character.name} />
-      <p>Name: {data.character.name}</p>
-      <p>Status: {data.character.status}</p>
-      <p>Species: {data.character.species}</p>
-      <p>Type: {data.character.type}</p>
-      <p>Gender: {data.character.gender}</p>
-      <p>Created: {data.character.created}</p>
+    <Grid container padding={4}>
+      <img
+        style={{ borderRadius: "50%" }}
+        src={data.character.image}
+        alt={data.character.name}
+      />
+      <Table>
+        <TableRow>
+          <TableCell>Name</TableCell>
+          <TableCell>{data.character.name}</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Status</TableCell>
+          <TableCell>{data.character.status}</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Species</TableCell>
+          <TableCell>{data.character.species}</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Type</TableCell>
+          <TableCell>{data.character.type}</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Gender</TableCell>
+          <TableCell>{data.character.gender}</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Created</TableCell>
+          <TableCell>{data.character.created}</TableCell>
+        </TableRow>
+      </Table>
       {data.character.origin && (
         <div>
           <h2>Origin</h2>
@@ -67,6 +91,6 @@ export default function Character() {
           ))}
         </div>
       )}
-    </>
+    </Grid>
   );
 }
