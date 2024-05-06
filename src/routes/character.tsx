@@ -6,7 +6,14 @@ import { Character as CharacterType } from "../types/character.types";
 import Link from "@mui/material/Link";
 
 import { CharacterCard } from "../components/card/CharacterCard";
-import { Grid, Table, TableCell, TableRow } from "@mui/material";
+import {
+  Grid,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableRow,
+} from "@mui/material";
 
 export default function Character() {
   const { characterId } = useParams();
@@ -24,49 +31,69 @@ export default function Character() {
         src={data.character.image}
         alt={data.character.name}
       />
-      <Table>
-        <TableRow>
-          <TableCell>Name</TableCell>
-          <TableCell>{data.character.name}</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Status</TableCell>
-          <TableCell>{data.character.status}</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Species</TableCell>
-          <TableCell>{data.character.species}</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Type</TableCell>
-          <TableCell>{data.character.type}</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Gender</TableCell>
-          <TableCell>{data.character.gender}</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell>Created</TableCell>
-          <TableCell>{data.character.created}</TableCell>
-        </TableRow>
-      </Table>
+      <Paper style={{ marginBottom: "1rem" }}>
+        <Table>
+          <TableBody>
+            <TableRow>
+              <TableCell>Name</TableCell>
+              <TableCell>{data.character.name}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Status</TableCell>
+              <TableCell>{data.character.status}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Species</TableCell>
+              <TableCell>{data.character.species}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Type</TableCell>
+              <TableCell>{data.character.type}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Gender</TableCell>
+              <TableCell>{data.character.gender}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Created</TableCell>
+              <TableCell>{data.character.created}</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </Paper>
       {data.character.origin && (
         <div>
           <h2>Origin</h2>
-          <>
-            <p>Origin name: {data.character.origin.name}</p>
-            <p>Origin dimension: {data.character.origin.dimension}</p>
-            <h3>Residents</h3>
-            {data.character.origin.residents && (
-              <Grid container spacing={2} padding={2} justifyContent={"center"}>
-                {data.character.origin.residents.map(
-                  (resident: CharacterType) => (
-                    <CharacterCard key={resident.id} {...resident} />
-                  )
-                )}
-              </Grid>
-            )}
-          </>
+          <Paper style={{ marginBottom: "1rem" }}>
+            <Table>
+              <TableBody>
+                <TableRow>
+                  <TableCell>Origin name</TableCell>
+                  <TableCell> {data.character.origin.name}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Origin dimension</TableCell>
+                  <TableCell> {data.character.origin.dimension}</TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell>Residents</TableCell>
+                  <TableCell>
+                    {data.character.origin.residents &&
+                      data.character.origin.residents.map(
+                        (resident: CharacterType) => (
+                          <Link
+                            key={resident.id}
+                            href={`/character-details/${resident.id}`}
+                          >
+                            {resident.name},{" "}
+                          </Link>
+                        )
+                      )}
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </Paper>
         </div>
       )}
 
@@ -74,20 +101,37 @@ export default function Character() {
         <div>
           <h2>Episodes</h2>
           {data.character.episode.map((episode: Episode) => (
-            <div key={episode.id}>
-              <p>Name: {episode.name}</p>
-              <p>Episode: {episode.episode}</p>
-              <p>Air date: {episode.air_date}</p>
-              <strong>Characters: </strong>
-              {episode.characters.map((character: CharacterType) => (
-                <Link
-                  key={character.id}
-                  href={`/character-details/${character.id}`}
-                >
-                  {character.name},{" "}
-                </Link>
-              ))}
-            </div>
+            <Paper key={episode.id} style={{ marginBottom: "1rem" }}>
+              <Table>
+                <TableBody>
+                  <TableRow>
+                    <TableCell>Name</TableCell>
+                    <TableCell>{episode.name}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Episode</TableCell>
+                    <TableCell>{episode.episode}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Air date</TableCell>
+                    <TableCell>{episode.air_date}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableCell>Characters</TableCell>
+                    <TableCell>
+                      {episode.characters.map((character: CharacterType) => (
+                        <Link
+                          key={character.id}
+                          href={`/character-details/${character.id}`}
+                        >
+                          {character.name},{" "}
+                        </Link>
+                      ))}
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+            </Paper>
           ))}
         </div>
       )}
