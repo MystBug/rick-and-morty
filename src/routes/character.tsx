@@ -50,23 +50,20 @@ export default function Character() {
         <div>
           <h2>Episodes</h2>
           {data.character.episode.map((episode: Episode) => (
-            <>
+            <div key={episode.id}>
               <p>Name: {episode.name}</p>
               <p>Episode: {episode.episode}</p>
               <p>Air date: {episode.air_date}</p>
               <strong>Characters: </strong>
               {episode.characters.map((character: CharacterType) => (
-                <>
-                  <Link
-                    key={character.id}
-                    href={`/character-details/${character.id}`}
-                  >
-                    {character.name}
-                  </Link>
-                  ,{" "}
-                </>
+                <Link
+                  key={character.id}
+                  href={`/character-details/${character.id}`}
+                >
+                  {character.name},{" "}
+                </Link>
               ))}
-            </>
+            </div>
           ))}
         </div>
       )}
