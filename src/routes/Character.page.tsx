@@ -4,7 +4,6 @@ import { useQuery } from "@apollo/client";
 import {
   Grid,
   Paper,
-  Skeleton,
   Table,
   TableBody,
   TableCell,
@@ -17,6 +16,7 @@ import { Episode } from "../types/episode.types";
 import { Character as CharacterType } from "../types/character.types";
 
 import { Tooltip } from "../components/Tooltip/Tooltip.component";
+import { CharacterPageLoader } from "../components/customLoaders/CharacterPage.component";
 
 export const Character = () => {
   const { characterId } = useParams();
@@ -24,78 +24,7 @@ export const Character = () => {
     variables: { id: characterId },
   });
 
-  if (loading)
-    return (
-      <Grid container>
-        <div
-          style={{
-            marginBottom: "1rem",
-            display: "flex",
-            justifyContent: "space-evenly",
-            width: "100%",
-          }}
-        >
-          <Skeleton
-            style={{ display: "block" }}
-            variant="circular"
-            width={300}
-            height={300}
-          />
-          <div>
-            <Skeleton
-              variant="rounded"
-              width={300}
-              height={40}
-              style={{ marginBottom: "0.5rem" }}
-            />
-            <Skeleton
-              variant="rounded"
-              width={300}
-              height={40}
-              style={{ marginBottom: "0.5rem" }}
-            />
-            <Skeleton
-              variant="rounded"
-              width={300}
-              height={40}
-              style={{ marginBottom: "0.5rem" }}
-            />
-            <Skeleton
-              variant="rounded"
-              width={300}
-              height={40}
-              style={{ marginBottom: "0.5rem" }}
-            />
-            <Skeleton
-              variant="rounded"
-              width={300}
-              height={40}
-              style={{ marginBottom: "0.5rem" }}
-            />
-            <Skeleton
-              variant="rounded"
-              width={300}
-              height={40}
-              style={{ marginBottom: "0.5rem" }}
-            />
-          </div>
-        </div>
-        <div style={{ marginTop: "2rem", width: "100%" }}>
-          <Skeleton
-            variant="rounded"
-            style={{ width: "100%" }}
-            width={0}
-            height={40}
-          />
-          <Skeleton
-            variant="rectangular"
-            style={{ width: "100%", marginTop: "1rem" }}
-            width={0}
-            height={250}
-          />
-        </div>
-      </Grid>
-    );
+  if (loading) return <CharacterPageLoader />;
   if (error) return <p>Error: {error.message}</p>;
 
   return (
