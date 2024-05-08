@@ -11,7 +11,7 @@ export const Search = () => {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
 
-  const [getCharactersByName, { loading, error, data }] = useLazyQuery(
+  const [getCharactersByName, { error, data }] = useLazyQuery(
     GET_CHARACTERS_BY_NAME
   );
 
