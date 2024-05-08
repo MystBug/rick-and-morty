@@ -2,7 +2,12 @@ import { Fragment, useEffect, useState } from "react";
 
 import { useLazyQuery } from "@apollo/client";
 
-import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
+import {
+  Accordion,
+  AccordionSummary,
+  AccordionDetails,
+  Skeleton,
+} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 import { GET_EPISODES } from "../queries/episodes.query";
@@ -16,6 +21,7 @@ import { Tooltip } from "../components/Tooltip/Tooltip.component";
 export const TopTen = () => {
   const [episodes, setEpisodes] = useState<Episode[]>([]);
   const [page, setPage] = useState(1);
+  const [fetching, setFetching] = useState(true);
   const [getEpisodes, { loading, error, data }] = useLazyQuery(GET_EPISODES, {
     variables: { page: page },
   });
@@ -37,12 +43,22 @@ export const TopTen = () => {
       if (data.episodes.info.next) {
         setPage(data.episodes.info.next);
       }
-    }
-  }, [data]);
 
-  if (loading) return <p>Loading...</p>;
+      if (page === data.episodes.info.pages) {
+        setFetching(false);
+      }
+    }
+  }, [data, page]);
+
   if (error) return <p>Error: {error.message}</p>;
-  if (!episodes.length) return <p>No episodes found.</p>;
+  if (fetching || loading)
+    return (
+      <div>
+        {Array(10).map((index: number) => (
+          <Skeleton key={index} animation="wave" />
+        ))}
+      </div>
+    );
 
   // Determine the origin dimensions for each character.
   const getDimensions = (characters: Character[]) => {
@@ -60,7 +76,7 @@ export const TopTen = () => {
 
   // Count the unique origin dimensions for each episode.
   const countDimensions = (dimensions: Dimension[]) => {
-    const counts: { [key: string]: number } = {}; // Add index signature
+    const counts: { [key: string]: number } = {};
     dimensions.forEach((dimension: Dimension) => {
       if (!counts[dimension.dimension]) {
         counts[dimension.dimension] = 0;
@@ -103,7 +119,8 @@ export const TopTen = () => {
               aria-controls={`${episode.episodeName}-content`}
               id={episode.episodeName}
             >
-              {index + 1}. {episode.episodeName}
+              {index + 1}. {episode.episodeName} (
+              {Object.keys(episode.counts).length} dimensions)
             </AccordionSummary>
             <AccordionDetails>
               {Object.keys(episode.counts).map((dimension, index) => {

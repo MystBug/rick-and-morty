@@ -18,7 +18,7 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage />,
   },
   {
-    path: "search/:searchTerm",
+    path: "search/:searchTerm/:page",
     element: (
       <Layout>
         <Results />

@@ -22,7 +22,7 @@ export const Search = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     getCharactersByName({ variables: { name: search } });
-    navigate(`/search/${search}`);
+    navigate(`/search/${search}/1`);
   };
 
   return (

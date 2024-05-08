@@ -1,10 +1,13 @@
 import { gql } from "@apollo/client";
 
 export const GET_CHARACTERS_BY_NAME = gql`
-  query GetCharactersByName($name: String!) {
-    characters(page: 1, filter: { name: $name }) {
+  query GetCharactersByName($page: Int!, $name: String!) {
+    characters(page: $page, filter: { name: $name }) {
       info {
         count
+        pages
+        next
+        prev
       }
       results {
         name
