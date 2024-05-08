@@ -111,6 +111,7 @@ export const TopTen = () => {
 
   return (
     <div>
+      <h1>Top 10</h1>
       {topTenEpisodes.map((episode, index) => {
         return (
           <Accordion key={`${episode}-${index}`}>
