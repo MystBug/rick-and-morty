@@ -14,7 +14,7 @@
 
 # Live demo
 
-[https://loquacious-haupia-84590d.netlify.app/](https://loquacious-haupia-84590d.netlify.app/)
+Via Netlify: [https://loquacious-haupia-84590d.netlify.app/](https://loquacious-haupia-84590d.netlify.app/)
 
 # What is this?
 
@@ -24,33 +24,12 @@ On the initial page you will find a search bar and a list of top 10 episodes wit
 
 When you search for a character, the application will display a list of results found based on the searchTerm. This list will display the character's name, image, and a link to the characters' detail page.
 
-# React + TypeScript + Vite
+# Featured packages
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- [React](https://reactjs.org/)
+- [Apollo Client](https://www.apollographql.com/docs/react/)
+- [GraphQL](https://graphql.org/)
+- [React Router](https://reactrouter.com/)
+- [Material-UI](https://material-ui.com/)
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-    project: ["./tsconfig.json", "./tsconfig.node.json"],
-    tsconfigRootDir: __dirname,
-  },
-};
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+Hosted on [Netlify](https://www.netlify.com/)
