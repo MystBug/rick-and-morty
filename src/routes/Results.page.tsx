@@ -17,22 +17,23 @@ export const Results = () => {
   const navigate = useNavigate();
 
   const [resultList, setResultList] = useState<Character[]>([]);
-  const [currentPage, setCurrentPage] = useState(Number(page) || 1);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   const [getCharacters, { loading, error, data }] = useLazyQuery(
     GET_CHARACTERS_BY_NAME,
     {
-      variables: { page: currentPage, name: searchTerm },
+      variables: { page: +currentPage, name: searchTerm },
     }
   );
 
   useEffect(() => {
-    setCurrentPage(page ? parseInt(page, 10) : currentPage);
+    setCurrentPage(page ? +page : currentPage);
   }, [page, currentPage]);
 
   useEffect(() => {
-    getCharacters();
-  }, [getCharacters, currentPage, resultList]);
+    console.log(currentPage);
+    if (currentPage) getCharacters();
+  }, [getCharacters, currentPage]);
 
   useEffect(() => {
     if (data) {

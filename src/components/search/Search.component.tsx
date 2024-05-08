@@ -21,8 +21,8 @@ export const Search = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    getCharactersByName({ variables: { name: search } });
     navigate(`/search/${search}/1`);
+    getCharactersByName({ variables: { page: 1, name: search } });
   };
 
   return (
@@ -45,7 +45,6 @@ export const Search = () => {
           </InputAdornment>
         }
       />{" "}
-      {loading && <p>Loading...</p>}
       {error && <p>Error: {error.message}</p>}
       {data?.characters.results.length === 0 && (
         <p>No results found for "{search}"</p>
