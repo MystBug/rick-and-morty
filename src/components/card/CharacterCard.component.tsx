@@ -1,4 +1,3 @@
-import { Character } from "../../types/character.types";
 import {
   Button,
   Card,
@@ -12,6 +11,8 @@ import {
 } from "@mui/material";
 import { red } from "@mui/material/colors";
 import VisibilityIcon from "@mui/icons-material/Visibility";
+
+import { Character } from "../../types/character.types";
 
 export const CharacterCard = (character: Character) => {
   return (

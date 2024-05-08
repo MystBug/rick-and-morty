@@ -1,26 +1,38 @@
 import { createBrowserRouter } from "react-router-dom";
-import Root from "./routes/root";
+
 import ErrorPage from "./error-page";
-import Character from "./routes/character";
-import { Results } from "./components/search/Results.component";
+import { Layout } from "./Layout";
+
+import { Results } from "./routes/Results.page";
+import { TopTen } from "./routes/TopTen.page";
+import { Character } from "./routes/Character.page";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Root />,
+    element: (
+      <Layout>
+        <TopTen />
+      </Layout>
+    ),
     errorElement: <ErrorPage />,
   },
   {
     path: "search/:searchTerm",
     element: (
-      <div>
-        <Root />
+      <Layout>
         <Results />
-      </div>
+      </Layout>
     ),
+    errorElement: <ErrorPage />,
   },
   {
     path: "character-details/:characterId",
-    element: <Character />,
+    element: (
+      <Layout>
+        <Character />
+      </Layout>
+    ),
+    errorElement: <ErrorPage />,
   },
 ]);

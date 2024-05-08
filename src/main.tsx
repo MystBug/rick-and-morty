@@ -1,10 +1,10 @@
 import ReactDOM from "react-dom/client";
+import { RouterProvider } from "react-router-dom";
 
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-
-import { RouterProvider } from "react-router-dom";
 import { ThemeProvider } from "@emotion/react";
 import { createTheme, CssBaseline } from "@mui/material";
+
 import { router } from "./routes.tsx";
 
 const client = new ApolloClient({

@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { Input, InputAdornment } from "@mui/material";
-
-import SearchIcon from "@mui/icons-material/Search";
-import { GET_CHARACTERS_BY_NAME } from "../../queries/characters.query";
-import { useLazyQuery } from "@apollo/client";
 import { useNavigate } from "react-router";
+
+import { useLazyQuery } from "@apollo/client";
+import { Input, InputAdornment } from "@mui/material";
+import SearchIcon from "@mui/icons-material/Search";
+
+import { GET_CHARACTERS_BY_NAME } from "../../queries/characters.query";
 
 export const Search = () => {
   const [search, setSearch] = useState("");
@@ -21,7 +22,7 @@ export const Search = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     getCharactersByName({ variables: { name: search } });
-    navigate("/search/" + search);
+    navigate(`/search/${search}`);
   };
 
   return (
@@ -29,8 +30,7 @@ export const Search = () => {
       onSubmit={(e) => handleSubmit(e)}
       style={{
         width: "100%",
-        padding: "5rem",
-        paddingBottom: 0,
+        padding: "2rem 5rem",
       }}
     >
       <Input

@@ -1,10 +1,13 @@
-import { Grid, Box } from "@mui/material";
-
-import { CharacterCard } from "../card/CharacterCard";
 import { useParams } from "react-router-dom";
+
+import { Grid, Box } from "@mui/material";
 import { useQuery } from "@apollo/client";
-import { GET_CHARACTERS_BY_NAME } from "../../queries/characters.query";
-import { Character } from "../../types/character.types";
+
+import { GET_CHARACTERS_BY_NAME } from "../queries/characters.query";
+
+import { Character } from "../types/character.types";
+
+import { CharacterCard } from "../components/card/CharacterCard.component";
 
 export const Results = () => {
   const { searchTerm } = useParams();
